@@ -1,0 +1,137 @@
+#Host 9.30.251.152
+#    Hostname 9.30.251.152
+#    User root
+#    PasswordAuthentication yes
+#    ForwardAgent yes
+#    ServerAliveInterval 60
+#    ServerAliveCountMax 10000
+#    StrictHostKeyChecking no
+#    ConnectTimeout 10
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/github_id_ed25519
+  IdentitiesOnly yes
+Host  pagdal
+  User rabalasubramanian@shellngqztwodal1001:22
+  Hostname  ssh-service-fcp-prod-dal10.bastion.k8s-dal10.softlayer.local
+  PubkeyAcceptedAlgorithms +ssh-rsa
+  Port 3023
+  ForwardAgent true
+  IdentitiesOnly yes
+  IdentityFile ~/.pag/dal10-api-user
+  CertificateFile ~/.pag/dal10-api-user-cert.pub
+  PasswordAuthentication no
+Host  pag-dal13                                 
+  User rabalasubramanian@shellngqztwodal1301:22
+  Hostname  ssh-service-fcp-prod-dal12.bastion.k8s-dal12.softlayer.local
+  PubkeyAcceptedAlgorithms +ssh-rsa
+  Port 3023
+  ForwardAgent true
+  IdentitiesOnly yes
+  IdentityFile ~/.pag/dal12-api-user
+  CertificateFile ~/.pag/dal12-api-user-cert.pub
+Host  pag-dal12                                 
+  User rabalasubramanian@shellngqztwodal1201:22
+  Hostname  ssh-service-fcp-prod-dal12.bastion.k8s-dal12.softlayer.local
+  PubkeyAcceptedAlgorithms +ssh-rsa
+  Port 3023
+  ForwardAgent true
+  IdentitiesOnly yes
+  IdentityFile ~/.pag/dal12-api-user
+  CertificateFile ~/.pag/dal12-api-user-cert.pub
+Host 9.114.87.51
+    HostName 9.114.87.51
+    User radbalas
+    PasswordAuthentication yes
+    #IdentityFile ~/.ssh/id_ed25519
+    CheckHostIP no
+    StrictHostKeyChecking no
+    ProxyCommand none
+    ForwardAgent yes
+  #ControlMaster auto
+    ControlPersist 10m
+    #PreferredAuthentications publickey
+Host *
+    #AddKeysToAgent yes
+    #IdentityFile ~/.ssh/id_rsa
+    ForwardAgent yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 10000
+    StrictHostKeyChecking no
+    ConnectTimeout 10 
+    PubkeyAcceptedKeyTypes rsa-sha2-512,rsa-sha2-256,ssh-rsa
+Host kms1a
+    Hostname 9.114.87.36
+    User radha
+    PasswordAuthentication yes
+    ForwardAgent yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 10000
+    StrictHostKeyChecking no
+    ConnectTimeout 10 
+ 
+Host github.ibm.com
+    AddKeysToAgent yes
+    User radbalas
+    IdentityFile ~/.ssh/github
+    ForwardAgent yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 10000
+    StrictHostKeyChecking no
+    ConnectTimeout 10 
+
+Host dal13g4-bm1
+    Hostname 52.116.28.169
+    User radbalas 
+    IdentityFile ~/.ssh/id_rsa
+    CheckHostIP no
+    ProxyCommand none
+    ForwardAgent yes
+    ControlMaster auto
+    ControlPersist 10m
+Host dal13g4-vdev1
+    User radbalas 
+    IdentityFile ~/.ssh/id_rsa
+    Hostname 10.200.143.61
+    ProxyJump dal13g4-bm1
+Host dal13g4-vdev20
+    User radbalas
+    IdentityFile ~/.ssh/id_rsa
+    Hostname 10.3.0.20
+    ProxyJump dal13g4-vdev1
+#Host 9.114.87.51
+#    HostName 9.114.87.51
+#    User radbalas
+#    PasswordAuthentication yes
+#    #IdentityFile ~/.ssh/id_ed25519
+#    CheckHostIP no
+#    StrictHostKeyChecking no
+#    ProxyCommand none
+#    ForwardAgent yes
+#  #ControlMaster auto
+#    ControlPersist 10m
+#    #PreferredAuthentications publickey
+Host 9.114.87.52
+    HostName 9.114.87.52
+    User radbalas
+    IdentityFile ~/.ssh/id_ed25519
+Host dal12-deploy
+  User rabalasubramaian
+  Hostname 10.200.127.39
+  IdentityFile /Users/rabalasubramaian/.ssh/id_ed25519
+  ProxyCommand  tsh -l rabalasubramanian --proxy=us-south.pylon.softlayer.local ssh --tty shellngqztwodal1201.softlayer.local nc %h 22 2>/dev/null
+Host dal12-qz2
+  Hostname shellngqztwodal1201.softlayer.local
+  User vnandipur
+  Port 3022
+  ProxyJump pylondal
+  IdentityFile /Users/rabalasubramaian/.tsh/keys/us-south.pylon.softlayer.local/rabalasubramaian@in.ibm.com
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+Host dal12
+  User rabalasubramanian
+  Hostname 10.200.127.39
+  ProxyCommand tsh -l rabalasubramanian --proxy=us-south.pylon.softlayer.local ssh -tty shellngqztwodal1201.softlayer.local nc %h 22 2>/dev/null
+  ServerAliveInterval 20
+
